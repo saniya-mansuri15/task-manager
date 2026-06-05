@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Task Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <h1>Sign Up</h1>
+      <p class="auth-subtitle">Create an account to get started</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <p class="flash flash-{{ category }}">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="post" class="auth-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autocomplete="username" placeholder="Choose a username" minlength="3">
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="Choose a password" minlength="4">
+
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account? <a href="{{ url_for('login') }}">Login</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

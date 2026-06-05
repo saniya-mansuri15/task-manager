@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-top">
+        <h1>Task Manager</h1>
+        <div class="header-actions">
+          {% if username %}
+            <span class="username">Hi, {{ username }}</span>
+          {% endif %}
+          <a href="/logout" class="btn btn-ghost">Logout</a>
+          <button class="btn btn-primary" id="new-task-btn">+ New Task</button>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </header>
+
+    <section class="toolbar">
+      <input type="search" id="search" placeholder="Search tasks..." aria-label="Search tasks">
+      <select id="filter-status" aria-label="Filter by status">
+        <option value="">All statuses</option>
+        <option value="pending">Pending</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+      <select id="filter-priority" aria-label="Filter by priority">
+        <option value="">All priorities</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </section>
+
+    <main>
+      <ul class="task-list" id="task-list">
+        {% for task in tasks %}
+        <li class="task-card {{ 'completed' if task.status == 'completed' else '' }}" data-id="{{ task.id }}">
+          <div class="task-main">
+            <div class="task-title">{{ task.title }}</div>
+            {% if task.description %}
+              <div class="task-description">{{ task.description }}</div>
+            {% endif %}
+            <p>Due: {{ task.due_date }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="empty-state" id="empty-state" hidden>No tasks found. Create one to get started.</p>
+    </main>
+  </div>
+
+  <dialog id="task-dialog">
+    <form id="task-form" method="dialog">
+      <h2 id="dialog-title">New Task</h2>
+      <input type="hidden" id="task-id">
+
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required maxlength="200" placeholder="What needs to be done?">
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="3" placeholder="Optional details..."></textarea>
+
+      <div class="form-row">
+        <div>
+          <label for="priority">Priority</label>
+          <select id="priority" name="priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div>
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <div>
+          <label for="due_date">Due Date</label>
+          <input type="date" name="due_date" id="due_date">
+        </div>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
