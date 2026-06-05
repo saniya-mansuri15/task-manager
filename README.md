@@ -31,9 +31,9 @@ A simple web-based Task Manager built with Flask. You can add, complete, and del
            ''' bash
             http://127.0.0.1:5000'''
 
- ##Project Structure
- app.py - Main Flask application
- database.py - Database connection setup
- models.py - Database models
-templates/ -HTML templates
-requirements.txt- Python dependencies           
+ ## Project Structure
+ - app.py - Main Flask application
+ - database.py - Database connection setup
+ - models.py - Database models
+ - templates/ -HTML templates
+ - requirements.txt- Python dependencies           
