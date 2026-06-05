@@ -20,18 +20,18 @@ A simple web-based Task Manager built with Flask. You can add, complete, and del
    git clone https://github.com/saniya-mansuri15/task-manager.git
    cd task-manager'''
 
-   Install dependencies
+   #Install dependencies
       '''bash 
       
-      gxpip install flask'''
-      Run the app
+    pip install flask'''
+     # Run the app
          ''' bash 
          python app.py'''
-         Open your browser and go to:
+        # Open your browser and go to:
            ''' bash
             http://127.0.0.1:5000'''
 
- Project Structure
+ ##Project Structure
  app.py - Main Flask application
  database.py - Database connection setup
  models.py - Database models
